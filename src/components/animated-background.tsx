@@ -287,10 +287,6 @@ const AnimatedBackground = () => {
     bongoAnimationRef.current = getBongoAnimation();
     keycapAnimationsRef.current = getKeycapsAnimation();
     
-    // Apply icons to keycaps after a short delay
-    setTimeout(() => {
-      applyIconsToKeycaps();
-    }, 1000);
     
     return () => {
       bongoAnimationRef.current?.stop()
