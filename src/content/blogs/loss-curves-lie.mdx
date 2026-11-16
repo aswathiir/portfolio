@@ -1,0 +1,37 @@
+---
+title: "Your loss curve is not your eval"
+publishedAt: "2026-11-16"
+summary: "Three bugs from this year that training metrics didn't catch, and the checks that finally did."
+author: "Aswathi Ranjith"
+tags: ["llm", "speech", "evaluation", "debugging"]
+---
+
+# Your loss curve is not your eval
+
+This year I trained a lot of models. Three times, the training metrics looked fine while the model was broken. Here's what happened each time, and the check that would have caught it sooner.
+
+## 1. A falling loss hiding a vocabulary-mask bug (MoA-CAS)
+
+In MoA-CAS I train small bottleneck adapters on a frozen IndicConformer backbone so it handles code-switched Hindi-English speech better. The loss went down nicely. The decoded text didn't get better.
+
+The cause turned out to be a vocabulary-mask bug. The model was optimising, just not towards anything useful. What caught it was a **decode-validation gate**: actually decoding held-out audio during training and checking the transcripts, not only the loss. With that in place the adapters cut WER from 55.4% to 45.4% on a speaker-disjoint test set.
+
+**Lesson:** for any sequence model, regularly decode a few samples and read them.
+
+## 2. A reward with zero gradient (SAHAi)
+
+SAHAi is an LLM tutor trained with GRPO to guide students without giving away the solution. Early on, training ran but nothing moved. When every rollout in a group gets the same reward, the group-relative advantage is zero, so there's no gradient.
+
+Reading the transcripts also showed role inversion (the tutor started acting like the student) and turns that were cut off mid-sentence. Switching to a **graded reward** raised reward spread from 0 to 1.32 and brought truncated turns down to about 5%.
+
+**Lesson:** for RL, track reward *variance* as well as reward mean, and read the transcripts.
+
+## 3. One wrong token ID (banking voice assistant)
+
+During my internship, the IndicTrans2 translations in our multilingual voice assistant were quietly wrong. Nothing crashed. The outputs were just wrong. The cause was an incorrect `forced_bos_token_id` at inference time. After fixing it, translation accuracy came back in all four languages.
+
+**Lesson:** test inference in isolation with known input/output pairs, before it's buried inside a pipeline.
+
+---
+
+The common thread: each time the training metric was technically correct and practically useless. Since then, I set up evaluation before I start training.

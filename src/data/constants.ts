@@ -1,38 +1,33 @@
+/**
+ * Keycap names MUST match the object names inside
+ * public/assets/skills_keyboard_updated.spline exactly (case and spaces
+ * included), otherwise hovering / pressing that key shows nothing.
+ * The icons printed on the keys are baked into the Spline scene; to swap an
+ * icon, edit the scene in the Spline editor and keep the object name in sync.
+ */
 export enum SkillNames {
-  // AI/ML Core Skills
-  AGENTICAI = "agentic ai",
-  NLP = "nlp",
-  COMPUTERVISION = "computer vision",
-
-  // Development Tools
-  N8N = "n8n",
-  GIT = "Git",
-  DOCKER = "Docker",
-
-  // Frontend
-  REACT = "React",
+  // Row 0
+  COMPUTERVISION = "computer vision ",
+  FIGMA = "figma",
   HTML = "HTML",
   CSS = "CSS",
-  TAILWIND = "Tailwindcsss",
-
-  // Backend/Database
-  MONGODB = "MongoDB",
-  FIREBASE = "Firebase",
-  SQL = "sql",
-
-  // Programming Languages
-  TYPESCRIPT = "Typescript",
-
-  // Robotics/3D
-  ROS = "ROS",
-  RVIZ = "RVIZ",
+  REACT = "React",
   MATLAB = "Matlab",
+  // Row 1
+  ROS = "ROS",
+  TAILWIND = "tailwindcss",
+  SQL = "sql",
+  RVIZ = "RVIZ",
+  MONGODB = "mongodb",
+  // Row 2
+  GIT = "Git",
+  N8N = "n8n",
+  NLP = "nlp",
+  FIREBASE = "Firebase",
+  AGENTICAI = "agentic ai",
+  // Row 3
+  DOCKER = "Docker",
   BLENDER = "blender",
-
-  // Design
-  FIGMA = "figma",
-
-  // Other
   MAXIMO = "maximo",
 }
 
@@ -45,227 +40,361 @@ export type Skill = {
   icon: string;
 };
 
+const DEVICON = "https://cdn.jsdelivr.net/gh/devicons/devicon/icons";
+
 export const SKILLS: Record<SkillNames, Skill> = {
-  // AI/ML Core Skills
   [SkillNames.AGENTICAI]: {
     id: 1,
-    name: "agentic ai",
+    name: SkillNames.AGENTICAI,
     label: "Agentic AI",
-    shortDescription: "Autonomous AI agents",
+    shortDescription: "A2A multi-agent systems, MCP & tool calling",
     color: "#7C3AED",
     icon: "https://cdn-icons-png.flaticon.com/512/8637/8637099.png",
   },
   [SkillNames.NLP]: {
     id: 2,
-    name: "nlp",
-    label: "NLP",
-    shortDescription: "Natural language processing",
+    name: SkillNames.NLP,
+    label: "NLP & Speech",
+    shortDescription: "Indic ASR, IndicTrans2, NER & intent models",
     color: "#00D4AA",
     icon: "https://cdn-icons-png.flaticon.com/512/9850/9850872.png",
   },
   [SkillNames.COMPUTERVISION]: {
     id: 3,
-    name: "computer vision",
+    name: SkillNames.COMPUTERVISION,
     label: "Computer Vision",
-    shortDescription: "Image processing & AI",
+    shortDescription: "OCR, Document AI & RGB-D perception",
     color: "#5C3EE8",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/opencv/opencv-original.svg",
+    icon: `${DEVICON}/opencv/opencv-original.svg`,
   },
-
-  // Development Tools
   [SkillNames.N8N]: {
     id: 4,
-    name: "n8n",
+    name: SkillNames.N8N,
     label: "n8n",
-    shortDescription: "Workflow automation",
+    shortDescription: "Workflow glue for RAG ingestion & agents",
     color: "#EA4B71",
     icon: "https://n8n.io/favicon.ico",
   },
   [SkillNames.GIT]: {
     id: 5,
-    name: "Git",
+    name: SkillNames.GIT,
     label: "Git",
-    shortDescription: "Version control",
+    shortDescription: "Version control for every project",
     color: "#F05032",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
+    icon: `${DEVICON}/git/git-original.svg`,
   },
   [SkillNames.DOCKER]: {
     id: 6,
-    name: "Docker",
+    name: SkillNames.DOCKER,
     label: "Docker",
-    shortDescription: "Containerization",
+    shortDescription: "Containerised FastAPI microservices",
     color: "#2496ed",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
+    icon: `${DEVICON}/docker/docker-original.svg`,
   },
-
-  // Frontend
   [SkillNames.REACT]: {
     id: 7,
-    name: "React",
-    label: "React",
-    shortDescription: "UI library",
+    name: SkillNames.REACT,
+    label: "React / Next.js",
+    shortDescription: "Frontends for my AI products",
     color: "#61dafb",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+    icon: `${DEVICON}/react/react-original.svg`,
   },
   [SkillNames.HTML]: {
     id: 8,
-    name: "HTML",
+    name: SkillNames.HTML,
     label: "HTML",
-    shortDescription: "Markup language",
+    shortDescription: "Where it all started",
     color: "#e34c26",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
+    icon: `${DEVICON}/html5/html5-original.svg`,
   },
   [SkillNames.CSS]: {
     id: 9,
-    name: "CSS",
+    name: SkillNames.CSS,
     label: "CSS",
-    shortDescription: "Styling",
+    shortDescription: "Making demos look decent",
     color: "#563d7c",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
+    icon: `${DEVICON}/css3/css3-original.svg`,
   },
   [SkillNames.TAILWIND]: {
     id: 10,
-    name: "Tailwindcsss",
+    name: SkillNames.TAILWIND,
     label: "Tailwind CSS",
-    shortDescription: "Utility-first CSS",
+    shortDescription: "Fast UI for dashboards & this site",
     color: "#38bdf8",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg",
+    icon: `${DEVICON}/tailwindcss/tailwindcss-original.svg`,
   },
-
-  // Backend/Database
   [SkillNames.MONGODB]: {
     id: 11,
-    name: "MongoDB",
+    name: SkillNames.MONGODB,
     label: "MongoDB",
-    shortDescription: "NoSQL database",
+    shortDescription: "Document storage for app data",
     color: "#4db33d",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
+    icon: `${DEVICON}/mongodb/mongodb-original.svg`,
   },
   [SkillNames.FIREBASE]: {
     id: 12,
-    name: "Firebase",
+    name: SkillNames.FIREBASE,
     label: "Firebase",
-    shortDescription: "Backend platform",
+    shortDescription: "Quick auth & realtime prototypes",
     color: "#FFCA28",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg",
+    icon: `${DEVICON}/firebase/firebase-plain.svg`,
   },
   [SkillNames.SQL]: {
     id: 13,
-    name: "sql",
-    label: "SQL",
-    shortDescription: "Database queries",
+    name: SkillNames.SQL,
+    label: "SQL / PostgreSQL",
+    shortDescription: "Supabase, Postgres & eligibility rules",
     color: "#00758F",
-    icon: "https://cdn-icons-png.flaticon.com/512/4492/4492311.png",
+    icon: `${DEVICON}/postgresql/postgresql-original.svg`,
   },
-
-  // Programming Languages
-  [SkillNames.TYPESCRIPT]: {
-    id: 14,
-    name: "Typescript",
-    label: "TypeScript",
-    shortDescription: "Typed JavaScript",
-    color: "#007acc",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
-  },
-
-  // Robotics/3D
   [SkillNames.ROS]: {
     id: 15,
-    name: "ROS",
-    label: "ROS",
-    shortDescription: "Robot Operating System",
+    name: SkillNames.ROS,
+    label: "ROS 2",
+    shortDescription: "Robotics middleware & sensor fusion",
     color: "#22314E",
     icon: "https://upload.wikimedia.org/wikipedia/commons/b/bb/Ros_logo.svg",
   },
   [SkillNames.RVIZ]: {
     id: 16,
-    name: "RVIZ",
+    name: SkillNames.RVIZ,
     label: "RViz",
-    shortDescription: "3D visualization for ROS",
+    shortDescription: "3D visualisation of point clouds",
     color: "#FFFFFF",
     icon: "https://upload.wikimedia.org/wikipedia/commons/b/bb/Ros_logo.svg",
   },
   [SkillNames.MATLAB]: {
     id: 17,
-    name: "Matlab",
+    name: SkillNames.MATLAB,
     label: "MATLAB",
-    shortDescription: "Numerical computing",
+    shortDescription: "EEG & biosignal preprocessing",
     color: "#E16737",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/matlab/matlab-original.svg",
+    icon: `${DEVICON}/matlab/matlab-original.svg`,
   },
   [SkillNames.BLENDER]: {
     id: 18,
-    name: "blender",
+    name: SkillNames.BLENDER,
     label: "Blender",
-    shortDescription: "3D modeling",
+    shortDescription: "3D modelling, for fun",
     color: "#F5792A",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/blender/blender-original.svg",
+    icon: `${DEVICON}/blender/blender-original.svg`,
   },
-
-  // Design
   [SkillNames.FIGMA]: {
     id: 19,
-    name: "figma",
+    name: SkillNames.FIGMA,
     label: "Figma",
-    shortDescription: "UI/UX design",
+    shortDescription: "Wireframes before I write code",
     color: "#F24E1E",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg",
+    icon: `${DEVICON}/figma/figma-original.svg`,
   },
-
-  // Other
   [SkillNames.MAXIMO]: {
     id: 20,
-    name: "maximo",
-    label: "Maximo",
-    shortDescription: "Asset management",
+    name: SkillNames.MAXIMO,
+    label: "IBM Maximo",
+    shortDescription: "Enterprise asset management",
     color: "#054ADA",
     icon: "https://cdn-icons-png.flaticon.com/512/2920/2920277.png",
   },
 };
 
+/* ------------------------------------------------------------------ */
+/* Full toolkit (shown as interactive chips under the 3D keyboard)    */
+/* ------------------------------------------------------------------ */
+
+export type ToolkitGroup = {
+  id: string;
+  title: string;
+  blurb: string;
+  items: string[];
+};
+
+export const TOOLKIT: ToolkitGroup[] = [
+  {
+    id: "genai",
+    title: "Generative AI & LLMs",
+    blurb: "Fine-tuning, retrieval and making sure the model actually behaves.",
+    items: [
+      "LLMs",
+      "Prompt Engineering",
+      "RAG",
+      "Embeddings",
+      "FAISS",
+      "Pinecone",
+      "ChromaDB",
+      "PEFT / LoRA",
+      "GRPO (RL)",
+      "LLM Evaluation",
+      "LLM-as-a-Judge",
+    ],
+  },
+  {
+    id: "agents",
+    title: "Agentic AI & Tooling",
+    blurb: "Agents that call tools, talk to each other and pick up the phone.",
+    items: [
+      "Multi-Agent Systems",
+      "A2A",
+      "Tool / Function Calling",
+      "MCP",
+      "Agent Skills",
+      "Claude API",
+      "Claude Code",
+      "Gemini API",
+      "n8n",
+      "Vapi Voice Agents",
+    ],
+  },
+  {
+    id: "ml",
+    title: "ML, NLP & Speech",
+    blurb: "The modelling side: from Indic speech to document understanding.",
+    items: [
+      "PyTorch",
+      "TensorFlow",
+      "Hugging Face Transformers",
+      "NLP",
+      "NER",
+      "Speech Recognition (ASR)",
+      "IndicTrans2",
+      "OCR / Document AI",
+      "Computer Vision",
+    ],
+  },
+  {
+    id: "backend",
+    title: "Backend, MLOps & Data",
+    blurb: "Shipping models as services people can actually call.",
+    items: [
+      "FastAPI",
+      "Flask",
+      "REST APIs",
+      "WebSocket",
+      "Microservices",
+      "Docker",
+      "Kubernetes",
+      "PostgreSQL",
+      "Supabase",
+      "pytest",
+      "Git",
+    ],
+  },
+  {
+    id: "languages",
+    title: "Languages",
+    blurb: "Python first, everything else when the project needs it.",
+    items: ["Python", "TypeScript (Next.js)", "SQL", "MATLAB", "Dart (Flutter)"],
+  },
+  {
+    id: "learning",
+    title: "Currently exploring",
+    blurb: "Familiar through coursework and side experiments.",
+    items: [
+      "LangGraph",
+      "Azure AI Foundry Agents",
+      "AWS for LLM Apps",
+      "CI/CD Pipelines",
+    ],
+  },
+];
+
+/* ------------------------------------------------------------------ */
+/* Experience & education                                             */
+/* ------------------------------------------------------------------ */
+
 export type Experience = {
   id: number;
+  type: "work" | "education";
   startDate: string;
   endDate: string;
   title: string;
   company: string;
+  location: string;
   description: string[];
-  skills: SkillNames[];
+  tags: string[];
 };
 
 export const EXPERIENCE: Experience[] = [
   {
     id: 1,
-    startDate: "Expected 2027",
-    endDate: "Present",
-    title: "Bachelor of Technology in Artificial Intelligence",
-    company: "Amrita Vishwa Vidyapeetham",
+    type: "work",
+    startDate: "Apr 2026",
+    endDate: "Jun 2026",
+    title: "Backend AI / ML Intern",
+    company: "i-Xceed Technology Solutions",
+    location: "Bengaluru",
     description: [
-      "CGPA: 7.67/10",
-      "Specialization in AI, Deep Learning, and Computer Vision.",
-      "Coimbatore, Tamil Nadu",
+      "Built a production-grade multilingual voice assistant for banking in Hindi, Tamil, Telugu and Kannada, combining IndicConformer 600M ASR, IndicTrans2 translation and Silero VAD.",
+      "Wrote the NLU service: IndicBART intent classification over a 121-class banking navigation schema, routing each request to a structured app_id / screen_id action.",
+      "Built a real-time FastAPI WebSocket backend with session keepalive, plus a Flutter client for low-latency voice interaction.",
+      "Tracked down a wrong forced_bos_token_id in IndicTrans2 inference that was quietly breaking translations, and restored accuracy across all four languages.",
     ],
-    skills: [
-      SkillNames.AGENTICAI,
-      SkillNames.NLP,
-      SkillNames.COMPUTERVISION,
-      SkillNames.ROS,
-    ],
+    tags: ["Python", "FastAPI", "WebSocket", "IndicConformer", "IndicTrans2", "IndicBART", "Flutter"],
   },
   {
     id: 2,
+    type: "education",
     startDate: "2023",
-    endDate: "Completed",
-    title: "High School Education",
-    company: "Kulapati Munshi Bhavans Vidya Mandir",
+    endDate: "2027 (expected)",
+    title: "B.Tech in Artificial Intelligence",
+    company: "Amrita Vishwa Vidyapeetham",
+    location: "Coimbatore",
     description: [
-      "Class 12th - 86%",
-      "Class 10th - 94.5%",
-      "Kerala",
+      "CGPA 7.86 / 10.",
+      "Coursework: Machine Learning, Deep Learning, NLP, Data Structures & Algorithms, Cloud Computing, Distributed Systems.",
+      "Two papers accepted in Springer LNNS (ICDAM 2026 and COMSYS 2026).",
     ],
-    skills: [
-      SkillNames.HTML,
-      SkillNames.CSS,
+    tags: ["ML", "Deep Learning", "NLP", "DSA", "Cloud", "Distributed Systems"],
+  },
+];
+
+/* ------------------------------------------------------------------ */
+/* Publications, certifications, awards                               */
+/* ------------------------------------------------------------------ */
+
+export const PUBLICATIONS = [
+  {
+    title: "ZELIA: Zero-Literacy Eligibility & Livelihood Intelligence Assistant",
+    venue: "Proc. ICDAM 2026, Springer LNNS",
+  },
+  {
+    title: "NutriGuard AI: Personalized Food Label Analysis System",
+    venue: "Proc. COMSYS 2026, Springer LNNS",
+  },
+];
+
+export const ACHIEVEMENTS = [
+  { title: "2nd Prize", detail: "Siemens Student Competition", year: "2026" },
+  { title: "1st Runner-Up", detail: "Altair RapidMiner Hackathon", year: "2025" },
+];
+
+export const CERTIFICATIONS = [
+  {
+    issuer: "Anthropic",
+    year: "2026",
+    items: [
+      "Claude API",
+      "MCP (Intro + Advanced)",
+      "Agent Skills",
+      "Claude Code",
+      "Claude on Google Cloud",
+      "AI Fluency",
+      "Claude 101",
+    ],
+  },
+  {
+    issuer: "Microsoft Learn",
+    year: "2026",
+    items: [
+      "Develop AI Agents on Azure",
+      "Discover Microsoft Foundry Agents with A2A",
+    ],
+  },
+  {
+    issuer: "Udemy · AWS Educate",
+    year: "2025",
+    items: [
+      "Machine Learning A-Z: AI, Python",
+      "Introduction to Generative AI",
     ],
   },
 ];
@@ -281,7 +410,7 @@ export const themeDisclaimers = {
   dark: [
     "Light mode? I thought you went insane... but welcome back to the dark side!",
     "Switching to dark mode... How was life on the bright side?",
-    "Dark mode activated! Thanks you from the bottom of my heart, and my eyes too.",
+    "Dark mode activated! Thank you from the bottom of my heart, and my eyes too.",
     "Welcome back to the shadows. How was life out there in the light?",
     "Dark mode on! Finally, someone who understands true sophistication.",
   ],

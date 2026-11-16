@@ -2,7 +2,8 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import React from "react";
 import { Button } from "../ui/button";
-import { File, Github, Linkedin } from "lucide-react";
+import { File, Mail } from "lucide-react";
+import { useEffect, useState } from "react";
 import {
   Tooltip,
   TooltipContent,
@@ -11,7 +12,7 @@ import {
 import { usePreloader } from "../preloader";
 import { BlurIn, BoxReveal } from "../reveal-animations";
 import ScrollDownIcon from "../scroll-down-icon";
-import { SiGithub, SiLinkedin, SiX } from "react-icons/si";
+import { SiGithub, SiLinkedin } from "react-icons/si";
 import { config } from "@/data/config";
 
 import SectionWrapper from "../ui/section-wrapper";
@@ -56,7 +57,7 @@ const HeroSection = () => {
                         )}
                       >
                         {config.author.split(" ")[0]}
-                        <br className="md:block hiidden" />
+                        <br />
                         {config.author.split(" ")[1]}
                       </h1>
                     </TooltipTrigger>
@@ -64,7 +65,7 @@ const HeroSection = () => {
                       side="top"
                       className="dark:bg-white dark:text-black"
                     >
-                      theres something waiting for you in devtools
+                      there&apos;s something waiting for you in devtools
                     </TooltipContent>
                   </Tooltip>
                 </BlurIn>
@@ -76,13 +77,19 @@ const HeroSection = () => {
                       "cursor-default font-display sm:text-xl md:text-xl whitespace-nowrap bg-clip-text "
                     )}
                   >
-                    AI ML Engineer
+                    <RotatingRole />
+                  </p>
+                </BlurIn>
+                <BlurIn delay={1.4}>
+                  <p className="hidden md:block mt-4 max-w-md text-base font-sans text-slate-600 dark:text-zinc-400 leading-relaxed">
+                    Final-year B.Tech AI student at Amrita. I build LLM, multi-agent
+                    and voice AI systems, from fine-tuning models to shipping them as services.
                   </p>
                 </BlurIn>
               </div>
               <div className="mt-8 flex flex-col gap-3 w-fit">
                 <Link
-                  href="/assets/resume.pdf"
+                  href={config.resume}
                   target="_blank"
                   className="flex-1"
                 >
@@ -106,16 +113,16 @@ const HeroSection = () => {
                       </Link>
                     </TooltipTrigger>
                     <TooltipContent side="bottom">
-                      <p>pls 🥹 🙏</p>
+                      <p>Open to AI/ML roles 🙌</p>
                     </TooltipContent>
                   </Tooltip>
                   <div className="flex items-center h-full gap-2">
                     <Link
-                      href={config.social.twitter}
-                      target="_blank"
+                      href={`mailto:${config.email}`}
+                      aria-label="Email"
                     >
-                      <Button variant={"outline"}>
-                        <SiX size={24} />
+                      <Button variant={"outline"} aria-label="Email">
+                        <Mail size={22} />
                       </Button>
                     </Link>
                     <Link
@@ -148,6 +155,28 @@ const HeroSection = () => {
         <ScrollDownIcon />
       </div>
     </SectionWrapper>
+  );
+};
+
+const ROLES = [
+  "AI Engineer",
+  "LLM & Agentic AI",
+  "Voice AI builder",
+  "ML Researcher",
+];
+
+const RotatingRole = () => {
+  const [i, setI] = useState(0);
+  useEffect(() => {
+    const t = setInterval(() => setI((v) => (v + 1) % ROLES.length), 2600);
+    return () => clearInterval(t);
+  }, []);
+  return (
+    <span className="relative inline-flex h-[1.5em] overflow-hidden align-bottom" aria-live="polite">
+      <span key={ROLES[i]} className="inline-block role-slide-in">
+        {ROLES[i]}
+      </span>
+    </span>
   );
 };
 

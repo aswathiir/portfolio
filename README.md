@@ -1,152 +1,73 @@
-# Aswathi Ranjith - AI ML Engineer Portfolio
+# Aswathi Ranjith · AI Engineer Portfolio
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/aswathiir/portfolio)
+Interactive portfolio for Aswathi Ranjith, a final-year B.Tech AI student building **LLM, multi-agent and voice AI systems**.
 
-## 🚀 Live Demo
-[View Portfolio](https://your-portfolio-url.vercel.app)
+**Live:** https://portfolio-sandy-six-30.vercel.app
 
-## 👋 About
+## What's inside
 
-Hi! I'm Aswathi Ranjith, an AI & ML Engineer specializing in:
-- 🤖 Agentic AI & Autonomous Systems
-- 🧠 Natural Language Processing
-- 👁️ Computer Vision & Image Processing
-- 🤝 Robotics (ROS, RViz)
-- 📊 Data Analysis & Machine Learning
+- **3D interactive keyboard** (Spline): hover or press a key to see how each tool is used
+- **Full toolkit** explorer: tabbed, categorised view of the complete tech stack
+- **Experience timeline**: internship, degree, publications, awards and certifications
+- **Projects** with category filters, tilt-on-hover cards and case-study modals
+- **Contact form** (Resend), live visitor cursors, dark/light mode, and a devtools easter egg
+- Responsive from 360px phones up to wide desktops
 
-This portfolio showcases my projects, skills, and experience in the AI/ML field.
+## Highlights
 
-## ✨ Features
+| | |
+|---|---|
+| **Experience** | Backend AI/ML Intern, i-Xceed Technology Solutions (Apr–Jun 2026): multilingual banking voice assistant |
+| **Education** | B.Tech Artificial Intelligence, Amrita Vishwa Vidyapeetham, Coimbatore (2027), CGPA 7.86 |
+| **Publications** | ZELIA (ICDAM 2026), NutriGuard AI (COMSYS 2026), both Springer LNNS |
+| **Awards** | 2nd Prize, Siemens Student Competition 2026 · 1st Runner-Up, Altair RapidMiner Hackathon 2025 |
 
-- **3D Interactive Keyboard** - Showcasing my tech stack with animated 3D keycaps
-- **Project Showcase** - Detailed case studies of AI/ML projects
-- **Real-time Collaboration** - Live cursor tracking for visitors
-- **Dark/Light Mode** - Elegant theming system
-- **Responsive Design** - Optimized for all devices
-- **Resume Download** - Direct access to my latest resume
+### Featured projects
 
-## 🛠️ Tech Stack
+- **SAHAi**: GRPO + LoRA fine-tuned LLM tutor for code-mixed DSA interview prep
+- **VoiceRAG**: multi-tenant voice AI agent platform (Vapi, Groq Llama 3.3, Pinecone, n8n)
+- **MoA-CAS**: adapter fine-tuning for code-switched Hindi-English ASR
+- **ZELIA**: voice-first welfare eligibility assistant for zero-literacy users
+- **NutriGuard AI**: personalised food-label analysis with a LoRA-tuned Donut model
+- **Multi-Agent Commerce (A2A)**: Gemini agents on Google's Online Boutique microservices
+- Plus: Neuromarketing (EEG + sentiment), Road Surface Perception (ROS 2), AirScript, SpotiGPT, WorkSync Plus
 
-### AI/ML
-- Python, TensorFlow, PyTorch
-- OpenCV, Computer Vision
-- Natural Language Processing
-- ROS 2, Intel RealSense SDK
+## Tech stack (site)
 
-### Web Development
-- Next.js 14, React, TypeScript
-- Tailwind CSS
-- Spline (3D Graphics)
-- Framer Motion (Animations)
+Next.js 14 (App Router) · TypeScript · Tailwind CSS · Framer Motion · GSAP · Spline · shadcn/ui · Resend
 
-### Tools & Platforms
-- Git, Docker, Kubernetes
-- MongoDB, Firebase
-- Figma, Blender
-- n8n (Workflow Automation)
-
-## 📂 Projects
-
-### 1. Neuromarketing Consumer Behavior Analysis
-AI-powered sentiment analysis for consumer behavior prediction using social media data.
-
-### 2. Road Levelling Analysis (Intel RealSense)
-Real-time 3D road surface analysis using Intel RealSense depth cameras and computer vision.
-
-### 3. Know Your Rights - AI Legal Assistant
-NLP-based legal assistant providing instant answers to legal queries.
-
-### 4. WorkSync Plus
-Collaborative productivity platform with real-time features.
-
-## 🎓 Education
-
-**B.Tech in Artificial Intelligence**  
-Amrita Vishwa Vidyapeetham | CGPA: 7.67/10 | Expected 2027
-
-## 🏆 Achievements
-
-- 🥈 1st Runner Up - Altair RapidMiner Hackathon
-- 📜 Certified in Machine Learning (Udemy)
-- 🏭 Completed Industry 4.0 Workshop
-
-## 🚀 Getting Started
-
-### Prerequisites
-- Node.js 18+ 
-- npm or yarn
-
-### Installation
+## Getting started
 
 ```bash
-# Clone the repository
-git clone https://github.com/aswathiir/portfolio.git
-
-# Navigate to project directory
-cd portfolio
-
-# Install dependencies
 npm install
-# or
-yarn install
-
-# Run development server
-npm run dev
-# or
-yarn dev
+npm run dev        # http://localhost:3000
+npm run build && npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Environment variables (optional)
 
-### Build for Production
+| Name | Purpose |
+|---|---|
+| `RESEND_API_KEY` | Enables the contact form (`/api/send`). Without it the form returns 503. |
+| `NEXT_PUBLIC_WS_URL` | Socket server for live cursors / chat (optional) |
+| `UMAMI_DOMAIN`, `UMAMI_SITE_ID` | Analytics (optional) |
 
-```bash
-npm run build
-npm start
-```
+## Editing content
 
-## 📁 Project Structure
+All content lives in `src/data/`:
 
-```
-portfolio/
-├── src/
-│   ├── app/          # Next.js app router pages
-│   ├── components/   # React components
-│   ├── data/         # Portfolio content & configuration
-│   └── lib/          # Utility functions
-├── public/
-│   └── assets/       # Images, resume, 3D models
-└── README.md
-```
+| File | What it controls |
+|---|---|
+| `config.ts` | Name, title, SEO, email, social links |
+| `constants.ts` | Keyboard keycap labels, toolkit, experience, publications, awards, certifications |
+| `projects.tsx` | Project cards and case studies (add `src` for a screenshot; otherwise a cover is generated) |
 
-## 🎨 Customization
+> **Keyboard keycaps:** the icons are baked into `public/assets/skills_keyboard_updated.spline`.
+> The `SkillNames` values in `constants.ts` must match the Spline object names exactly
+> (for example, `"computer vision "` has a trailing space). To change an icon, edit the scene in Spline.
 
-To customize this portfolio for your own use:
+The resume is served from `public/assets/resume.pdf`.
 
-1. Update personal info in `src/data/config.ts`
-2. Modify projects in `src/data/projects.tsx`
-3. Update skills in `src/data/constants.ts`
-4. Replace images in `public/assets/`
-5. Update resume at `public/assets/resume.pdf`
+## Acknowledgments
 
-## 📞 Contact
-
-- **Email**: aswathiranjikk@gmail.com
-- **Phone**: +91 9746621918
-- **LinkedIn**: [aswathiranjith](https://linkedin.com/in/aswathiranjith)
-- **GitHub**: [@aswathiir](https://github.com/aswathiir)
-- **Location**: Thrissur, Kerala, India
-
-## 📝 License
-
-This project is open source and available under the [MIT License](LICENSE).
-
-## 🙏 Acknowledgments
-
-- 3D keyboard design powered by [Spline](https://spline.design)
-- UI components from [shadcn/ui](https://ui.shadcn.com)
-- Animations with [Framer Motion](https://www.framer.com/motion)
-
----
-
-**Built with ❤️ by Aswathi Ranjith**
+Originally based on the open-source portfolio template by Naresh Khatri. 3D keyboard built with [Spline](https://spline.design), UI from [shadcn/ui](https://ui.shadcn.com).

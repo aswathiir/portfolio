@@ -1,26 +1,34 @@
 const config = {
-  title: "Aswathi Ranjith | AI Engineer",
+  title: "Aswathi Ranjith | AI Engineer · LLMs, Agentic AI & Voice AI",
   description: {
-    long: "Explore the portfolio of Aswathi Ranjith, an AI Engineer specializing in Deep Learning, Computer Vision, and Real-time Image Processing. Discover my latest work in Neuromarketing, Robotics, and Legal Tech.",
+    long: "Portfolio of Aswathi Ranjith, a final-year B.Tech AI student and AI Engineer building LLM, multi-agent and voice AI systems: RAG pipelines, A2A multi-agent services, LoRA/GRPO fine-tuned LLMs, multilingual speech and LLM-as-a-judge evaluation. Two Springer publications.",
     short:
-      "Portfolio of Aswathi Ranjith, an AI Engineer specializing in Deep Learning and Computer Vision.",
+      "AI Engineer building LLM, multi-agent and voice AI systems in Python.",
   },
   keywords: [
     "Aswathi Ranjith",
-    "Aswathi",
     "AI Engineer",
-    "Computer Vision",
-    "Deep Learning",
-    "Robotics",
-    "Python",
-    "TensorFlow",
+    "LLM",
+    "Agentic AI",
+    "Multi-Agent Systems",
+    "RAG",
+    "Voice AI",
+    "Speech Recognition",
+    "LoRA",
+    "GRPO",
+    "MCP",
+    "FastAPI",
     "PyTorch",
-    "ROS 2",
+    "Amrita Vishwa Vidyapeetham",
     "portfolio",
   ],
   author: "Aswathi Ranjith",
+  role: "AI Engineer",
+  tagline: "LLMs · Agentic AI · Voice AI",
   email: "aswathiranjikk@gmail.com",
-  site: "https://portfolio-aswathiranjith.com",
+  location: "Thrissur, Kerala, India",
+  site: "https://portfolio-sandy-six-30.vercel.app",
+  resume: "/assets/resume.pdf",
 
   // for github stars button
   githubUsername: "aswathiir",
@@ -30,10 +38,7 @@ const config = {
     return this.site + "/assets/seo/og-image.png";
   },
   social: {
-    twitter: "https://www.linkedin.com/in/aswathiranjith/",
     linkedin: "https://www.linkedin.com/in/aswathiranjith/",
-    instagram: "https://www.linkedin.com/in/aswathiranjith/",
-    facebook: "https://www.linkedin.com/in/aswathiranjith/",
     github: "https://github.com/aswathiir",
   },
 };
