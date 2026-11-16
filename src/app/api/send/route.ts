@@ -25,7 +25,6 @@ export async function POST(req: Request) {
     }
 
     const body = await req.json();
-    console.log(body);
     const {
       success: zodSuccess,
       data: zodData,
@@ -33,12 +32,16 @@ export async function POST(req: Request) {
     } = Email.safeParse(body);
 
     if (!zodSuccess)
-      return Response.json({ error: zodError?.message }, { status: 400 });
+      return Response.json(
+        { error: zodError?.issues[0]?.message ?? "Invalid input" },
+        { status: 400 }
+      );
 
     const { data: resendData, error: resendError } = await resend.emails.send({
       from: "Portfolio <onboarding@resend.dev>",
       to: [config.email],
-      subject: "Contact me from portfolio",
+      subject: `Portfolio message from ${zodData.fullName}`,
+      replyTo: zodData.email,
       react: EmailTemplate({
         fullName: zodData.fullName,
         email: zodData.email,
@@ -47,11 +50,16 @@ export async function POST(req: Request) {
     });
 
     if (resendError) {
-      return Response.json({ resendError }, { status: 500 });
+      console.error("Resend error", resendError);
+      return Response.json(
+        { error: "The email service rejected the message. Please email me directly." },
+        { status: 500 }
+      );
     }
 
     return Response.json(resendData);
   } catch (error) {
-    return Response.json({ error }, { status: 500 });
+    console.error("Contact form error", error);
+    return Response.json({ error: "Unexpected server error" }, { status: 500 });
   }
 }

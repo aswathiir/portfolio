@@ -7,7 +7,7 @@ import { Textarea } from "./ui/ace-textarea";
 import { cn } from "@/lib/utils";
 import { useToast } from "./ui/use-toast";
 import { Button } from "./ui/button";
-import { useRouter } from "next/navigation";
+import { config } from "@/data/config";
 
 const ContactForm = () => {
   const [fullName, setFullName] = React.useState("");
@@ -16,10 +16,27 @@ const ContactForm = () => {
   const [loading, setLoading] = React.useState(false);
 
   const { toast } = useToast();
-  const router = useRouter();
+
+  const showError = (description: React.ReactNode) =>
+    toast({
+      title: "Message not sent",
+      description,
+      className: cn(
+        "top-0 w-full flex justify-center fixed md:max-w-7xl md:top-4 md:right-4"
+      ),
+      variant: "destructive",
+    });
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    // Mirror the server-side rules so people get a clear message straight away.
+    if (fullName.trim().length < 2)
+      return showError("Please enter your name (at least 2 characters).");
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim()))
+      return showError("Please enter a valid email address.");
+    if (message.trim().length < 10)
+      return showError("Your message is a little short. Please write at least 10 characters.");
+
     setLoading(true);
     try {
       const res = await fetch("/api/send", {
@@ -28,36 +45,45 @@ const ContactForm = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          fullName,
-          email,
-          message,
+          fullName: fullName.trim(),
+          email: email.trim(),
+          message: message.trim(),
         }),
       });
-      const data = await res.json();
-      if (data.error) throw new Error(data.error);
+      const data = await res.json().catch(() => ({}));
+      if (res.status === 503) {
+        const subject = encodeURIComponent(`Hello from ${fullName.trim()}`);
+        const body = encodeURIComponent(`${message.trim()}\n\n${fullName.trim()} (${email.trim()})`);
+        showError(
+          <span>
+            The contact form is offline right now.{" "}
+            <a
+              className="underline font-semibold"
+              href={`mailto:${config.email}?subject=${subject}&body=${body}`}
+            >
+              Send it by email instead
+            </a>
+            .
+          </span>
+        );
+        setLoading(false);
+        return;
+      }
+      if (!res.ok || data.error) throw new Error(typeof data.error === "string" ? data.error : "");
       toast({
         title: "Thank you!",
         description: "I'll get back to you as soon as possible.",
         variant: "default",
         className: cn("top-0 mx-auto flex fixed md:top-4 md:right-4"),
       });
-      setLoading(false);
       setFullName("");
       setEmail("");
       setMessage("");
-      const timer = setTimeout(() => {
-        router.push("/");
-        clearTimeout(timer);
-      }, 1000);
     } catch (err) {
-      toast({
-        title: "Error",
-        description: "Something went wrong! Please check the fields.",
-        className: cn(
-          "top-0 w-full flex justify-center fixed md:max-w-7xl md:top-4 md:right-4"
-        ),
-        variant: "destructive",
-      });
+      showError(
+        (err as Error)?.message ||
+          `Something went wrong on my side. You can email me at ${config.email}.`
+      );
     }
     setLoading(false);
   };
